@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Good Thymes Virtual Grocery</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" th:href="@{/css/test.css}"/>
+</head>
+
+<body>
+
+<p th:text="${date}">Welcome to our grocery store!</p>
+
+<p th:text="${date}">Welcome to our grocery store!</p>
+
+<p th:text="'Time on the remote server is ' + ${date}" class="funny"/>
+
+</body>
+
+</html>

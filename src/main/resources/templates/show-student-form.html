@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Student Register Form</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" th:href="@{/css/test.css}"/>
+</head>
+<body>
+<form th:action="@{/students/student-register-form}" th:object="${student}" method="POST">
+
+    <!--First Name: <input type="text" th:field="${student.firstName}"/>-->
+    First Name: <input type="text" th:field="*{firstName}"/>
+    <br><br>
+
+    <!--Last Name: <input type="text" th:field="${student.lastName}"/>-->
+    Last Name: <input type="text" th:field="*{lastName}"/>
+    <br><br>
+
+    Country:
+    <select th:field="*{country}">
+        <!--<option th:value="Brazil">Brazil</option>
+        <option th:value="France">France</option>
+        <option th:value="Germany">Germany</option>
+        <option th:value="Italy">Italy</option>
+        <option th:value="China">China</option>-->
+
+        <option th:each  = "tempCountry: ${countries} "
+                th:value = "${tempCountry}"
+                th:text  = "${tempCountry}"/>
+    </select>
+
+    <br><br>
+
+    Favourite Programming Language:
+    <!--<input type="radio" th:field="*{favouriteLanguage}" th:value="Java">Java</input>
+    <input type="radio" th:field="*{favouriteLanguage}" th:value="Python">Python</input>
+    <input type="radio" th:field="*{favouriteLanguage}" th:value="Go">Go</input>-->
+
+    <input type="radio"
+           th:field="*{favouriteLanguage}"
+           th:each  = "language: ${languages} "
+           th:value = "${language}"
+           th:text  = "${language}"/>
+    <br><br>
+
+    Favourite Operating Systems:
+    <!--<input type="checkbox" th:field="*{favouriteSystems}" th:value="Linux">Linux</input>
+    <input type="checkbox" th:field="*{favouriteSystems}" th:value="MacOS">MacOS</input>
+    <input type="checkbox" th:field="*{favouriteSystems}" th:value="'Microsoft Windows'">Microsoft Windows</input>-->
+    <input type="checkbox"
+           th:field="*{favouriteSystems}"
+           th:each  = "system: ${systems} "
+           th:value = "${system}"
+           th:text  = "${system}"/>
+
+    <br><br>
+
+    <input type="submit" value="Submit"/>
+
+</form>
+</body>
+</html>
