@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>Employee Directory</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" th:href="@{/css/test.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <!--script th:src="@{/js/bootstrap.bundle.min.js}"></script-->
+</head>
+<body>
+<div class="container">
+<h3> Employees</h3>
+    <hr>
+    <a th:href="@{/employees/add-employee}" class="btn btn-primary btn-sm mb-3">Add Employee</a>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+        <th sec:authorize="hasRole('Manager')" scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each = "emp: ${employees}">
+        <td th:text = "${emp.firstName}"/>
+        <td th:text = "${emp.lastName}"/>
+        <td th:text = "${emp.email}"/>
+        <td sec:authorize="hasRole('Manager')">
+            <a th:href="@{/employees/update-employee(employeeId=${emp.id})}" class="btn btn-info btn-sm">Update</a>
+            <a th:href="@{/employees/delete-employee(employeeId=${emp.id})}" class="btn btn-danger btn-sm"
+               onclick="if(!(confirm('Are you sure to delete the employee?'))) return false">Delete</a>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+
+    <form action="#" th:action="@{/logout}" method="POST">
+
+        <input type="submit" value="Logout"/>
+
+    </form>
+
+    User: <span sec:authentication="principal.username"></span>
+    Role: <span sec:authentication="principal.authorities"></span>
+
+</div>
+
+
+</body>
+</html>

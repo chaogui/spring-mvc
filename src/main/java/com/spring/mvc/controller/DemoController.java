@@ -3,6 +3,7 @@ package com.spring.mvc.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDateTime;
 
@@ -26,5 +27,14 @@ public class DemoController {
 
         //wil return hello helloworld.html
         return "helloworld1";
+    }
+
+    @RequestMapping("/test-mav")
+    public ModelAndView testMav(){
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("date", LocalDateTime.now());
+        mav.setViewName("helloworld");
+
+        return mav;
     }
 }
